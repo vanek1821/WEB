@@ -1,0 +1,73 @@
+<title>Konference_MainPage</title>
+</head>
+<body> 
+  <div class="container-fluid">
+    <!--<header>
+      <h1 >WEB konference</h1> 
+      <h3>Semestrální práce z předmětu WEB</h3>
+    </header>-->
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.php">WebKonference</a>
+    </div>
+     <ul class="nav navbar-nav">
+      <li><a href="index.php">Hlavní stránka</a></li>
+      <li><a href="index.php?info=temata">Témata</a></li>
+      <li><a href="index.php?info=terminy">Termíny</a></li>
+      <li><a href="index.php?info=organizatori">Organizátoři</a></li>
+      <li><a href="index.php?info=misto">Místo konání</a></li>
+      <li><a href="index.php?info=sponzori">Sponzoři</a></li>
+      <li><a href="index.php?info=pokyny">Pokyny</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="index.php?page=login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+             
+
+<article class="article">
+  <?php 
+
+  if(isset($_GET['info'])){
+    if($_GET['info']=='temata'){
+      echo
+      "<h1>Temata</h1> <br> 
+      <p>zde se nachází témata konference...</p>";
+    }
+    if($_GET['info']=='terminy'){
+      echo
+      "<h1>Termíny</h1> <br> 
+      <p>zde se nachází termíny konference...</p>";
+    }
+    if($_GET['info']=='organizatori'){
+      echo
+      "<h1>Organizatori</h1> <br> 
+      <p>zde se nachází organizátoři konference...</p>";
+    }
+    if($_GET['info']=='misto'){
+      echo
+      "<h1>Místo</h1> <br> 
+      <p>zde se nachází místo konference...</p>";
+    }
+    if($_GET['info']=='sponzori'){
+      echo
+      "<h1>Sponzoři</h1> <br> 
+      <p>zde se nachází sponzoři konference...</p>";
+    }
+    if($_GET['info']=='pokyny'){
+      echo
+      "<h1>Pokyny</h1> <br> 
+      <p>zde se nachází pokyny konference...</p>";
+    }
+  }
+  else{
+    echo
+      "<h1>Vítejte</h1> <br> 
+      <p>Navštívili jste stránky konference</p>";
+    
+  }
+  ?>
+</article>

@@ -1,14 +1,14 @@
 <?php
-	echo "Hello world!";
-
 	ini_set('display_errors','1');
 	session_start();
 
 	function load($class){
-		if (mb_strpos($class, "controller")===false) {
-			require("model/$class.php");
+		if (mb_strpos($class, "Controller")===false) {
+			
+			require("model/Database.php");
 		} else {
-			@require("controller/$class.php");
+			
+			require("controller/$class.php");
 		}
 	}
 	spl_autoload_register("load");
@@ -17,10 +17,11 @@
 		$_GET['page'] = "Controller_".$_GET['page'];
 		$controller = new $_GET['page'];
 	} else {
-		$controller = new Controller_main;
+
+		$controller = new Controller_mainPage;
 	}
 
-	$db = new Datatbase;
+	$db = new Database;
 	$controller->DoWork();
 	$controller->Display();
 
