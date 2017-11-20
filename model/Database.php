@@ -18,6 +18,21 @@ class Database{
        		echo "error: " . $e->getmessage();
       	}  
 	}
+
+	 /**
+     * Vrací všechny údaje o uživateli podle uživatelského jména
+     * $name uživatelské jméno
+     */
+    public static function returnAllLogin($name) {
+      $query = "select * from users where login = :login"; 
+    	$data = self::$conn->prepare($query);
+      
+      $name = htmlspecialchars($name);
+      
+      $data->bindparam(':login', $name);
+    	$data->execute();
+      return $data->fetchall();
+    }
 }
 
 ?>
