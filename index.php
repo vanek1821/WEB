@@ -21,7 +21,7 @@
 		$controller = new Controller_mainPage;
 	}
 
-	$db = new Database;
+	$db = new Database();
 	$controller->DoWork();
 	$controller->Display();
 

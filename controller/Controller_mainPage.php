@@ -10,6 +10,12 @@
 		public function doWork(){
 			
 		}
+		public function Display(){
+
+		if($this->view !=""){
+			require("view/template/template.phtml");
+		}
+	}
 	}
 
 

@@ -13,9 +13,26 @@
      <ul class="nav navbar-nav">
       <li><a href="index.php">Zpět</a></li>
     </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="index.php?page=login"><span class="glyphicon glyphicon-log-in"></span> Přihlásit se</a></li>
-    </ul>
+    <?php
+      if ($_SESSION['signed']==false) {
+        echo '
+          <ul class="nav navbar-nav navbar-right">
+          <li><a href="index.php?page=login"><span class="glyphicon glyphicon-log-in"></span> Přihlásit se</a></li>
+          <li><a href="index.php?page=signUp"><span class="glyphicon glyphicon-pencil"></span> Zaregistrovat se</a></li>
+          </ul>
+        ';
+      }
+      else {
+        $user = $_SESSION['user'];
+        echo '
+          <ul class="nav navbar-nav navbar-right">
+          <li><a>uživatel: '. $user .'</a></li>
+          <li><a href="index.php?page=signOut"><span class="glyphicon glyphicon-log-out"></span> Odhlásit se</a></li>
+          </ul>
+        ';
+      }
+    ?>
+    
   </div>
 </nav>
              
@@ -24,7 +41,40 @@
       <h2 class="form-signin-heading">Přihlásit se</h2>
       <input type="text" class="form-control" name="login" placeholder="Uživatelské jméno" required="" autofocus="" />
       <input type="password" class="form-control" name="password" placeholder="Heslo" required=""/> 
-      <button name="loginbutton" class="btn btn-lg btn-primary btn-block" type="submit" value="login_button">Přihlásit</button>
+      <button name="loginButton" class="btn btn-lg btn-primary btn-block" type="submit" value="login_button">Přihlásit</button>
+   <?php
+  if(isset($_GET['login_status'])){
+    if($_GET['login_status']=='wrong_password'){
+      echo '
+            <div class="alert alert-danger">
+            <strong>Špatné heslo!</strong> Zadali jste špatné heslo.
+            </div>
+            ';
+    }
+    if($_GET['login_status']=='unknown_user'){
+      echo '
+            <div class="alert alert-warning">
+            <strong>Neznámý uživatel!</strong> Uživatel neexistuje. Klikněte na tlačítko zaregistrovat nebo klikněte
+             <a href="index.php?page=signUp">zde</a>....
+            </div>
+            ';
+    }
+    if($_GET['login_status']=='success'){
+      echo '
+            <div class="alert alert-success">
+            <strong>Úspěšné přihlášení</strong> Nyní jste přihlášen jako '.$_SESSION['user'].'
+            </div>
+            ';
+    }
+    if($_GET['login_status']=='already_logged'){
+      echo '
+            <div class="alert alert-warning">
+            <strong>Opakované přihlášení</strong> Na stránce je již přihlášen uživatel. Nejprve se odhlaste.
+            </div>
+            ';
+    }
+  }
+?>
 
     </form>
   </div>

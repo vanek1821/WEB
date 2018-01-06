@@ -1,0 +1,151 @@
+<head>
+  <title>Konference_NewAccount</title>
+  <!--<link rel="stylesheet" type="text/css" href="css/signUp.css">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+
+    <link rel="stylesheet" type="text/css" href="css/signUp.css">
+
+    <!-- Website CSS style -->
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+    <!-- Website Font style -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+</head>
+<body> 
+  <div class="container-fluid">
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.php">WebKonference</a>
+    </div>
+     <ul class="nav navbar-nav">
+      <li><a href="index.php">Zpět</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="index.php?page=login"><span class="glyphicon glyphicon-log-in"></span> Přihlásit se</a></li>
+    </ul>
+  </div>
+</nav>
+    <div class="container">
+      <div class="row main">
+         <div class="main-login main-center">
+          <form class="form-horizontal" method="post" action="" id="signUpForm" >
+            
+            <div class="form-group">
+              <label for="name" class="cols-sm-2 control-label">Vaše jméno</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="name" id="name"  placeholder="Zadejte své jméno a příjmení"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="cols-sm-2 control-label">Váš e-mail</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="email" id="email"  placeholder="Zadejte e-mailovou adresu"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="cols-sm-2 control-label">Uživatelské jméno</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="login" id="login"  placeholder="Zadejte uživatelské jméno"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password" class="cols-sm-2 control-label">Heslo</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                  <input type="password" class="form-control" name="password" id="password"  placeholder="Zadejte heslo"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm" class="cols-sm-2 control-label">Potvrďte heslo</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                  <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Potvrďte heslo"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <button type="submit" name="signUpButton" class="btn btn-primary btn-lg btn-block login-button" value="submit" form="signUpForm">Zaregistrovat</button>
+            </div>
+            <?php
+              if(isset($_GET['miss'])){
+                if($_GET['miss']=='login'){
+                  echo '
+                        <div class="alert alert-danger">
+                        <strong>Chybí uživatelské jméno!</strong> Nezadali jste uživatelské jméno.
+                        </div>
+                        ';
+                }
+                if($_GET['miss']=='name'){
+                  echo '
+                        <div class="alert alert-danger">
+                        <strong>Chybí jméno!</strong> Nezadali jste jméno a příjmení
+                        </div>
+                        ';
+                }
+                if($_GET['miss']=='password'){
+                  echo '
+                        <div class="alert alert-danger">
+                        <strong>Chybí heslo!</strong> Nezadali jste heslo
+                        </div>
+                        ';
+                }
+                if($_GET['miss']=='email'){
+                  echo '
+                        <div class="alert alert-danger">
+                        <strong>Chybí e-mail!</strong> Nezadali jste e-mailovou adresu
+                        </div>
+                        ';
+                }
+                if($_GET['miss']=='notConfirmed'){
+                  echo '
+                        <div class="alert alert-danger">
+                        <strong>Heslo nesouhlasí!</strong> hesla se neshodují.
+                        </div>
+                        ';
+                }
+                if($_GET['miss']=='loginAlreadyExists'){
+                  echo '
+                        <div class="alert alert-danger">
+                        <strong>Uživatel již existuje!</strong> Uživatel s tímto přihlašovacím jménem již existuje.. Prosím vyberte jiné.
+                        </div>
+                        ';
+                }
+                if($_GET['miss']=='emailAlreadyExists'){
+                  echo '
+                        <div class="alert alert-danger">
+                        <strong>Uživatel již existuje!</strong> Uživatel s touto e-mailovou adresou již existuje..
+                        </div>
+                        ';
+                }
+              }
+            ?>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
