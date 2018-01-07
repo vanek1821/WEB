@@ -1,0 +1,63 @@
+<h2>Hodnotit příspěvek</h2>
+<form action ="" class="" method="post">
+	<div class="column form-group col-xs-10">
+		<div class="row">
+			<div class="form-group col-xs-4">
+			  	<div class="form-group">
+			  		<label>Název příspěvku</label>
+			    	<input name="contName" type="text" class="form-control" required="" autofocus="" value="<?php echo $this->contName ?>" readonly>
+			  	</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-xs-6">
+				<label>Příspěvek</label>
+		    		<textarea name="cont" class="form-control" id="exampleTextarea" rows="5" required="" readonly><?php echo $this->cont ?></textarea>
+		  	</div>
+	  	</div>
+	  	<div class="row">
+			<div class="form-group col-xs-2">
+				<label>Originalita</label>
+				<select class="form-control" name="originality" id="originality">
+		    		<option>0</option>
+		    		<option>1</option>
+		    		<option>2</option>
+		    		<option>3</option>
+		    		<option>4</option>
+		    		<option>5</option>
+		  		</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-xs-2">
+				<label>Kvalita</label>
+				<select class="form-control" name="quality" id="quality">
+		    		<option>0</option>
+		    		<option>1</option>
+		    		<option>2</option>
+		    		<option>3</option>
+		    		<option>4</option>
+		    		<option>5</option>
+		  		</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-xs-2">
+				<label>Doporučení</label>
+				<select class="form-control" name="recommendation" id="quality">
+		    		<option>0</option>
+		    		<option>1</option>
+		    		<option>2</option>
+		    		<option>3</option>
+		    		<option>4</option>
+		    		<option>5</option>
+		  		</select>
+			</div>
+		</div>
+		<br>
+		<div class="row form-group col-xs-11">
+			<button name="reviewButton" type="submit" class="btn btn-primary">Hodnotit příspěvek</button>
+			<button name="back"  class="btn btn-primary" formnovalidate>Zpět</button>
+		</div>
+	</div>
+</form>

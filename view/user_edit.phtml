@@ -1,0 +1,47 @@
+<div class="container">
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Uživatelské jméno</th>
+				<th>Jméno a Příjmení</th>
+				<th>E-mail</th>
+				<th>Práva</th>
+				<th>Akce</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($_POST['users'] as $user) { ?>
+				<tr>
+					<td>	
+						<?php echo $user['login'] ?>
+					</td>
+					<td>	
+						<?php echo $user['name'] ?>
+					</td>
+					<td>	
+						<?php echo $user['email'] ?>
+					</td>
+					<td>	
+						<?php 
+						switch($user['privileges']){
+							case '1': echo 'Administrátor';
+								break;
+							case '2': echo 'Recenzent';
+								break;
+							case '3': echo 'Autor';
+								break;
+							}
+						?>
+					</td>
+					<td>
+						<form method="post">
+							<button name='editUserButton' type='submit' class='btn btn-default btn-info btn-sm' value="<?php echo $user['id']?>">
+								<span class='glyphicon glyphicon glyphicon-edit'></span> Upravit
+							</button>
+						</form>
+					</td>
+				</tr>
+			<?php } ?>
+		</tbody>
+	</table>
+</div>

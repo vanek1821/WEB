@@ -1,8 +1,23 @@
-.table th, td {
-   vertical-align: middle;
+/*.table th, td {
+   vertical-align: middle; 
    text-align: center;   
 
 }
 .table th{
 	font-size: 130%;
+}*/
+table {
+  display: table !important;
+}
+
+table th {
+  display: table-cell !important;
+  font-size: 130%;
+  background-color: #A9A9A9;
+}
+
+table, table th, table td, td {
+  text-align: center !important; 
+  vertical-align: middle !important; 
+
 }

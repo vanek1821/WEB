@@ -172,6 +172,116 @@ class Database{
   			echo "conn is null";
   		}
   	}
+
+    public static function getContRevs($contID){
+      if (self::$conn!=NULL){
+        $query = "select * from `reviews` WHERE `cont_id` = $contID";
+        $data = self::$conn->prepare($query);
+        $data->bindparam(':cont_id', $contID);
+
+        $data->execute();
+
+        return $data->fetchall();
+      }
+      else{
+        echo "conn is null";
+      }
+    }
+
+    public static function getUserID($login){
+     if (self::$conn!=NULL){
+        $query = "select id from users where login = :login";
+        $data = self::$conn->prepare($query);
+        $data->bindparam(':login', $login);
+
+        $data->execute();
+
+        return $data->fetchall();
+      }
+      else{
+        echo "conn is null";
+      } 
+    }
+    public static function getUserName($id){
+     if (self::$conn!=NULL){
+        $query = "select login from users where id = :id";
+        $data = self::$conn->prepare($query);
+        $data->bindparam(':id', $id);
+
+        $data->execute();
+
+        return $data->fetchall();
+      }
+      else{
+        echo "conn is null";
+      } 
+    } 
+    public static function addRev($contID, $userID){
+     if(self::$conn!=NULL){
+              $query = "insert into `reviews` (`id`, `user_id`, `cont_id`, `originality`, `quality`, `recommendation`, `overall`) values (NULL, '$userID', '$contID', '0', '0', '0', '0')";
+        $data = self::$conn->prepare($query);
+        $data->bindparam(':user_ID', $userID);
+        $data->bindparam(':cont_ID', $contID);
+
+        $data->execute();
+      }
+    }
+    public static function deleteRev($id){
+     if(self::$conn!=NULL){
+              $query = "delete from `reviews` where `reviews`.`id` = :id";
+        $data = self::$conn->prepare($query);
+        $data->bindparam(':id', $id);
+
+        $data->execute();
+      }
+    } 
+    public static function getRevs($id){
+      if(self::$conn!=NULL){
+        $query = "select * from reviews where user_id = :id";
+        $data = self::$conn->prepare($query);
+        $data->bindparam(':id', $id);
+        $data->execute();
+        return $data->fetchall();
+      }
+    }
+    public static function getRev($id){
+      if(self::$conn!=NULL){
+        $query = "select * from reviews where id = :id";
+        $data = self::$conn->prepare($query);
+        $data->bindparam(':id', $id);
+        $data->execute();
+        return $data->fetchall();
+      }
+    }
+    public static function getCont($id){
+     if(self::$conn!=NULL){
+        $query = "select * from contributions where id = :id";
+        $data = self::$conn->prepare($query);
+        $data->bindparam(':id', $id);
+        $data->execute();
+        return $data->fetchall();
+      }
+    } 
+    public static function addReview($id, $originality, $quality, $recommendation, $overall){
+      if(self::$conn!=NULL){
+        $query = "update reviews set originality = :originality, quality = :quality, recommendation = :recommendation, overall = :overall WHERE id = :id";
+        $data = self::$conn->prepare($query);
+        $data->bindparam(':id', $id);
+        $data->bindparam(':originality', $originality);
+        $data->bindparam(':quality', $quality);
+        $data->bindparam(':recommendation', $recommendation);
+        $data->bindparam(':overall', $overall);
+        $data->execute();
+      }
+    }
+    public static function getUsers(){
+      if(self::$conn!=NULL){
+        $query = "select * from users";
+        $data = self::$conn->prepare($query);
+        $data->execute();
+        return $data->fetchall();
+      }
+    }
 }
 
 ?>

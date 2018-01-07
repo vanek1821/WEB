@@ -52,112 +52,39 @@
 
 		public function doAdminWork(){
 			$_POST['tableBody'] = "";
-			$tableRec = "";
-			$row = Database::getAllConts();
+			$_POST['tableRec'] = "";
+			$_POST['row'] = Database::getAllConts();
 			$recenzents = Database::getRecenzents();
 			foreach ($recenzents as $recenzent) {
-        		$tableRec .= "<option>". $recenzent['login'] ."</option>";
+        		$_POST['tableRec'] .= "<option>". $recenzent['login'] ."</option>";
         	}
-			foreach ($row as $record) {
-
-				$_POST['tableBody'] .= "
-					<tr>
-						<td rowspan='3' class='col-xs-2'>" . $record['name'] . "</td>
-						<td rowspan='3' class='col-xs-2'>". $record['author'] . "</td>
-						<td> 
-									
-	      							<select class='form-control' id='sel1'>
-	        							".$tableRec."
-	      							</select>
-	      				</td>
-	      							
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-						<td rowspan='3' class='col-xs-3'>
-							<form method='post'>
-								<button name='editButton' type='submit' class='btn btn-default btn-success btn-sm' value='".$record['id']."'>
-									<span class='glyphicon glyphicon glyphicon-thumbs-up'></span> Přijmout
-								</button>
-								<button name='removeButton' type='submit' class='btn btn-default btn-danger btn-sm' value='".$record['id']."'>
-									<span class='glyphicon glyphicon glyphicon-thumbs-down'></span> Vymazat
-								</button>
-							</form>
-						</td>
-						</tr>
-						<tr>
-							<td> 
-									
-	      							<select class='form-control' id='sel1'>
-	        							".$tableRec."
-	      							</select>
-	      							
-						</td>
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-						</tr>
-						<tr>
-							<td> 
-									
-	      							<select class='form-control' id='sel1'>
-	        							".$tableRec."
-	      							</select>
-	      							
-						
-						</td>
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-					</tr>";
-			}
-			
+        	if(isset($_POST['assignButton1'])){
+        		$sel1 = $_POST['sel1'];
+        		$row = Database::getUserId($sel1);
+        		$array = array_shift($row);
+        		Database::addRev($_POST['assignButton1'], $array['id']);
+        	}
+        	if(isset($_POST['assignButton2'])){
+        		$sel2 = $_POST['sel2'];
+        		$row = Database::getUserId($sel2);
+        		$array = array_shift($row);
+        		Database::addRev($_POST['assignButton2'], $array['id']);
+        	}
+        	if(isset($_POST['assignButton3'])){
+        		$sel3 = $_POST['sel3'];
+        		$row = Database::getUserId($sel3);
+        		$array = array_shift($row);
+        		Database::addRev($_POST['assignButton3'], $array['id']);
+        	}
+        	if(isset($_POST['removeRevButton'])){
+        		Database::deleteRev($_POST['removeRevButton']);
+        	}
 		}
 
 		
 		public function doAuthorWork(){
-			$tableBody = "";
-			$row = Database::getAuthorsConts($this->author);
-			foreach ($row as $record) {
-				$tableBody .= "	
-				<tr> 
-					<td class='col-xs-3'>" . $record['name'] . "</td> 
-					<td> ". $record['cont'] ." </td>
-					<td class='col-xs-2'>
-						<form method='post'>
-							<button name='editButton' type='submit' class='btn btn-default btn-sm' value='".$record['id']."'>
-								<span class='glyphicon glyphicon-edit'></span> Upravit
-							</button>
-							<button name='removeButton' type='submit' class='btn btn-default btn-sm' value='".$record['id']."'>
-								<span class='glyphicon glyphicon-remove'></span> Vymazat
-							</button>
-						</form>
-					</td> 
-				</tr>";
-
-			}
-
-			$_POST['table'] = '
-				<div class="container">
-				  <table class="table table-bordered table-striped">
-				    <thead class="thead-default">
-				      <tr>
-				        <th>Název příspěvku</th>
-				        <th>Příspěvek</th>
-				        <th>Akce</th>
-				      </tr>
-				    </thead>
-				    <tbody>' 
-				      . $tableBody .
-				    '</tbody>
-				  </table>
-				</div>';
+			$_POST['tableBody'] = "";
+			$_POST['row'] = Database::getAuthorsConts($this->author);
 
 			if(isset($_POST['editButton'])){
 				header('Location: http://localhost/index.php?page=edit_cont&id='.$_POST['editButton']);
@@ -168,6 +95,18 @@
 			}
 		}
 		public function doRecWork(){
+			$_POST['revOptions'] = "";
+			$tmp = Database::getUserID($_SESSION['user']);
+			$tmp = array_shift($tmp);
+			$id = $tmp['id'];
+			$_POST['revs'] = Database::getRevs($id); 
+			for ($i=0; $i < 6; $i++) { 
+				$_POST['revOptions'] .= $i;
+			}
+			if(isset($_POST['reviewButton'])){
+				echo 'kliknuto';
+				header('Location: http://localhost/index.php?page=review&id='.$_POST['reviewButton']);
+			}
 		}	
 	}
 ?>

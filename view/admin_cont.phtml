@@ -3,17 +3,17 @@
 <br>
 <div class="container">
 				  <table class="table table-bordered table-striped">
-				    <thead class="thead-inverse">
+				    <thead>
                         <tr>
                             <th rowspan="2">Název</th>
-                            <th rowspan="2">Autoři</th>
+                            <th rowspan="2">Autor</th>
                             <th colspan="6">Recenze</th>
                             <th rowspan="2">Rozhodnutí</th>
                         </tr>
 
                         <tr class = "subCol">
                               <th>Recenzent</th>
-                              <th> ORIG.</th>
+                              <th>ORIG.</th>
                               <th>KVAL.</th>
                               <th>DOPO.</th>
                               <th>CELK.</th>
@@ -21,10 +21,198 @@
                         </tr>
                         </thead>
 				    <tbody> 
-				      <?php echo $_POST['tableBody']; 
+					<?php   foreach ($_POST['row'] as $record) { ?>
 
-				      ?>
-				    </tbody>
+
+					<tr>
+						<td rowspan='3' class='col-xs-2'><?php echo $record['name']?></td>
+						<td rowspan='3' class='col-xs-2'><?php echo $record['author']?></td>
+
+						<?php 
+						$tmpRevs = Database::getContRevs($record['id']);
+						$revs = array_shift($tmpRevs);
+						if ($revs[0]==NULL) { ?>
+						<td>
+						 		<form method='post'> 
+	      							<select class='form-control' name='sel1' id='sel1'>
+	        							<?php echo $_POST['tableRec']?>
+	      							</select>
+
+	      				</td>
+	      			
+						<td colspan="5">
+							
+								<input type='hidden' value=''>
+								<button name='assignButton1' type='submit' class='btn btn-default btn-info btn-sm' value="<?php echo $record['id']?>">
+									<span class='glyphicon glyphicon glyphicon-hand-left'></span> Přiřadit recenzenta
+								</button>
+							</form>
+						</td>
+						<?php } else { ?>
+						<td>
+							<?php
+								$tmp = Database::getUserName($revs['user_id']);
+								$userID = array_shift($tmp);
+								echo $userID[0];
+							?>	
+						</td>
+						<td>
+							<?php
+								echo $revs['originality'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['quality'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['recommendation'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['originality'];
+							?>
+						</td>
+						<td>
+							<form method='post'>
+								<button name='removeRevButton' type='submit' class='btn btn-default btn-danger btn-sm' value='<?php echo $revs['id'] ?>'>
+									<span class='glyphicon glyphicon glyphicon-remove'></span> Vymazat hodnocení
+								</button>
+							</form>
+						</td>
+						<?php } ?>
+						<td rowspan='3' class='col-xs-3'>
+							<form method='post'>
+								<button name='acceptButton' type='submit' class='btn btn-default btn-success btn-sm' value='".$record['id']."'>
+									<span class='glyphicon glyphicon glyphicon-thumbs-up'></span> Přijmout
+								</button>
+								<button name='declineButton' type='submit' class='btn btn-default btn-danger btn-sm' value='".$record['id']."'>
+									<span class='glyphicon glyphicon glyphicon-thumbs-down'></span> Odmítnout
+								</button>
+							</form>
+						</td>
+					</tr>
+
+
+					<?php
+					 $revs = array_shift($tmpRevs);
+					 if($revs==NULL) {
+					?>
+					<td>
+						<form method='post'> 
+	      					<select class='form-control' name='sel2' id='sel2'>
+	        				<?php echo $_POST['tableRec']?>
+	      				</select>
+	      			</td>
+					<td colspan="5">
+						<input type='hidden' value=''>
+							<button name='assignButton2' type='submit' class='btn btn-default btn-info btn-sm' value="<?php echo $record['id']?>">
+								<span class='glyphicon glyphicon glyphicon-hand-left'></span> Přiřadit recenzenta
+							</button>
+						</form>
+					</td>
+					<?php } else { ?>
+					<tr>
+						<td>
+							<?php
+								$tmp = Database::getUserName($revs['user_id']);
+								$userID = array_shift($tmp);
+								echo $userID['login'];
+							?>	
+						</td>
+						<td>
+							<?php
+								echo $revs['originality'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['quality'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['recommendation'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['originality'];
+							?>
+						</td>
+						<td>
+							<form method='post'>
+								<button name='removeRevButton' type='submit' class='btn btn-default btn-danger btn-sm' value='<?php echo $revs['id'] ?>'>
+									<span class='glyphicon glyphicon glyphicon-remove'></span> Vymazat hodnocení
+								</button>
+							</form>
+						</td>
+					</tr>
+					<?php }
+					$revs = array_shift($tmpRevs);
+					if($revs==NULL) {
+					?>
+					<tr>
+						<td>
+						<form method='post'> 
+	      					<select class='form-control' name='sel3' id='sel3'>
+	        				<?php echo $_POST['tableRec']?>
+	      				</select>
+		      			</td>
+						<td colspan="5">
+							<input type='hidden' value=''>
+								<button name='assignButton3' type='submit' class='btn btn-default btn-info btn-sm' value="<?php echo $record['id']?>">
+									<span class='glyphicon glyphicon glyphicon-hand-left'></span> Přiřadit recenzenta
+								</button>
+							</form>
+						</td>
+					</tr>
+					<?php } else { ?>
+					<tr>
+						<td>
+							<?php
+								$tmp = Database::getUserName($revs['user_id']);
+								$userID = array_shift($tmp);
+								echo $userID['login'];
+							?>	
+						</td>
+						<td>
+							<?php
+								echo $revs['originality'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['quality'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['recommendation'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['originality'];
+							?>
+						</td>
+						<td>
+							<form method='post'>
+								<button name='removeRevButton' type='submit' class='btn btn-default btn-danger btn-sm' value='<?php echo $revs['id']?>'>
+									<span class='glyphicon glyphicon glyphicon-remove'></span> Vymazat hodnocení
+								</button>
+							</form>
+						</td>
+					</tr>
+
+			<?php 
+					}
+				}
+			?>
+				    </tbody> 
 				  </table>
 				</div>
 
