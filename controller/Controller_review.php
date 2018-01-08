@@ -1,6 +1,8 @@
 <?php
+	//Hodnocení
 	Class Controller_review extends Controller{
 		
+
 		protected $revID;
 		protected $contName;
 		protected $cont;
@@ -30,9 +32,12 @@
 			$this->contName = $cont['name'];			
 			$this->cont = $cont['cont'];
 
+			//Tlačítko zpět
 			if(isset($_POST['back'])){
 				header("Location: http://localhost/index.php?page=cont");
 			}
+
+			//Uložení hodnocení a jeho přidání do databáze
 			if(isset($_POST['reviewButton'])){
 				$this->originality = $_POST['originality'];
 				$this->quality = $_POST['quality'];

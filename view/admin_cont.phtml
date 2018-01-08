@@ -1,17 +1,20 @@
 
 <h2>Seznam příspěvků</h2>
-<br>
-<div class="container">
-				  <table class="table table-bordered table-striped">
-				    <thead>
-                        <tr>
-                            <th rowspan="2">Název</th>
-                            <th rowspan="2">Autor</th>
-                            <th colspan="6">Recenze</th>
-                            <th rowspan="2">Rozhodnutí</th>
-                        </tr>
+<?php if ($_POST['row']==NULL) {
+	echo '<h3>Žádné příspěvky</h3>';
+} else { ?>
 
-                        <tr class = "subCol">
+<div class="container">
+	<table class="table table-bordered table-striped">
+		<thead>
+		    <tr>
+                <th rowspan="2">Název</th>
+                <th rowspan="2">Autor</th>
+                <th colspan="6">Recenze</th>
+				<th rowspan="2">Rozhodnutí</th>
+	        </tr>
+
+			<tr class = "subCol">
                               <th>Recenzent</th>
                               <th>ORIG.</th>
                               <th>KVAL.</th>
@@ -78,20 +81,39 @@
 						</td>
 						<td>
 							<form method='post'>
-								<button name='removeRevButton' type='submit' class='btn btn-default btn-danger btn-sm' value='<?php echo $revs['id'] ?>'>
+								<button name='removeRevButton' type='submit' class='btn btn-default btn-danger btn-sm' value='<?php echo $revs['id'] ?>' <?php if($record['decision'] != '0') echo 'disabled';?>>
 									<span class='glyphicon glyphicon glyphicon-remove'></span> Vymazat hodnocení
 								</button>
 							</form>
 						</td>
 						<?php } ?>
-						<td rowspan='3' class='col-xs-3'>
+						<td rowspan='3' class='col-xs-4'>
 							<form method='post'>
-								<button name='acceptButton' type='submit' class='btn btn-default btn-success btn-sm' value='".$record['id']."'>
+								<?php if($record['decision'] == 0) { ?>
+								<button name='displayButton' type='submit' class='btn btn-default btn-sm' value='<?php echo $record['id']?>'>
+									<span class='glyphicon glyphicon-search'></span> Zobrazit
+								</button>
+ 								<button name='acceptButton' type='submit' class='btn btn-default btn-success btn-sm' value='<?php echo $record['id'] ?>'>
 									<span class='glyphicon glyphicon glyphicon-thumbs-up'></span> Přijmout
 								</button>
-								<button name='declineButton' type='submit' class='btn btn-default btn-danger btn-sm' value='".$record['id']."'>
+								<button name='declineButton' type='submit' class='btn btn-default btn-danger btn-sm' value='<?php echo $record['id'] ?>'>
 									<span class='glyphicon glyphicon glyphicon-thumbs-down'></span> Odmítnout
 								</button>
+								<?php } else if($record['decision'] == 1) { ?>
+								<button name='displayButton' type='submit' class='btn btn-default btn-sm' value='<?php echo $record['id']?>'>
+									<span class='glyphicon glyphicon-search'></span> Zobrazit
+								</button>
+								<button name='' type='submit' class='btn btn-default btn-success btn-sm' value='<?php echo $record['id'] ?>'>
+									<span class='glyphicon glyphicon glyphicon-thumbs-up'></span> Příspěvek přijat
+								</button>
+								<?php } else if($record['decision'] == -1) { ?>
+								<button name='displayButton' type='submit' class='btn btn-default btn-sm' value='<?php echo $record['id']?>'>
+									<span class='glyphicon glyphicon-search'></span> Zobrazit
+								</button>
+								<button name='' type='submit' class='btn btn-default btn-danger btn-sm' value='<?php echo $record['id'] ?>'>
+									<span class='glyphicon glyphicon glyphicon-thumbs-down'></span> Příspěvek odmítnut
+								</button>
+								<?php } ?>
 							</form>
 						</td>
 					</tr>
@@ -145,7 +167,7 @@
 						</td>
 						<td>
 							<form method='post'>
-								<button name='removeRevButton' type='submit' class='btn btn-default btn-danger btn-sm' value='<?php echo $revs['id'] ?>'>
+								<button name='removeRevButton' type='submit' class='btn btn-default btn-danger btn-sm' value='<?php echo $revs['id'] ?>' <?php if($record['decision'] != '0') echo 'disabled';?>>
 									<span class='glyphicon glyphicon glyphicon-remove'></span> Vymazat hodnocení
 								</button>
 							</form>
@@ -201,7 +223,7 @@
 						</td>
 						<td>
 							<form method='post'>
-								<button name='removeRevButton' type='submit' class='btn btn-default btn-danger btn-sm' value='<?php echo $revs['id']?>'>
+								<button name='removeRevButton' type='submit' class='btn btn-default btn-danger btn-sm' value='<?php echo $revs['id']?>' <?php if($record['decision'] != '0') echo 'disabled';?>>
 									<span class='glyphicon glyphicon glyphicon-remove'></span> Vymazat hodnocení
 								</button>
 							</form>
@@ -211,6 +233,7 @@
 			<?php 
 					}
 				}
+			}
 			?>
 				    </tbody> 
 				  </table>

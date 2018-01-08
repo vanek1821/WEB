@@ -1,0 +1,165 @@
+<h2>Nástěnka</h2>
+
+<?php if($_POST['row']==NULL){
+		echo '<h3>Žádné příspěvky</h3>';	
+} else { ?>
+<div class="container">
+  <table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th rowspan="2">Název</th>
+            <th rowspan="2">Autor</th>
+            <th colspan="5">Recenze</th>
+            <th rowspan="2">Akce</th>
+        </tr>
+
+            <tr class = "subCol">
+            <th>Recenzent</th>
+            <th>ORIG.</th>
+            <th>KVAL.</th>
+            <th>DOPO.</th>
+            <th>CELK.</th>
+        </tr>
+    </thead>
+				    <tbody> 
+					<?php   foreach ($_POST['row'] as $record) {
+						if($record['decision']==1) {
+					 ?>
+
+
+					<tr>
+						<td rowspan='3' class='col-xs-2'><?php echo $record['name']?></td>
+						<td rowspan='3' class='col-xs-2'><?php echo $record['author']?></td>
+
+						<?php 
+						$tmpRevs = Database::getContRevs($record['id']);
+						$revs = array_shift($tmpRevs);
+						if ($revs[0]==NULL) { ?>
+						<td>
+						 		Chybí recenzent
+	      				</td>
+	      			
+						<td colspan="5">
+							
+						</td>
+						<?php } else { ?>
+						<td>
+							<?php
+								$tmp = Database::getUserName($revs['user_id']);
+								$userID = array_shift($tmp);
+								echo $userID[0];
+							?>	
+						</td>
+						<td>
+							<?php
+								echo $revs['originality'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['quality'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['recommendation'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['originality'];
+							?>
+						</td>
+						<td rowspan='3' class='col-xs-1'>
+							<form method='post'>
+								<button name='displayButton' type='submit' class='btn btn-default btn-sm' value='<?php echo $record['id']?>'>
+									<span class='glyphicon glyphicon-search'></span> Zobrazit
+								</button>
+							</form>
+						</td>
+					</tr>
+
+
+					<?php
+					 $revs = array_shift($tmpRevs);
+					if($revs==NULL) {
+					?>
+						Chybí recenzent
+					<?php } else { ?>
+					<tr>
+						<td>
+							<?php
+								$tmp = Database::getUserName($revs['user_id']);
+								$userID = array_shift($tmp);
+								echo $userID['login'];
+							?>	
+						</td>
+						<td>
+							<?php
+								echo $revs['originality'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['quality'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['recommendation'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['originality'];
+							?>
+						</td>
+					</tr>
+					<?php }
+					$revs = array_shift($tmpRevs);
+					if($revs==NULL) {
+					?>
+						Chybí recenzent
+					<?php } else { ?>
+					<tr>
+						<td>
+							<?php
+								$tmp = Database::getUserName($revs['user_id']);
+								$userID = array_shift($tmp);
+								echo $userID['login'];
+							?>	
+						</td>
+						<td>
+							<?php
+								echo $revs['originality'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['quality'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['recommendation'];
+							?>
+						</td>
+						<td>
+							<?php
+								echo $revs['originality'];
+							?>
+						</td>
+					</tr>
+
+			<?php 
+						}
+					}
+					}	
+					}
+				}
+			?>
+				    </tbody> 
+				  </table>
+				</div>
+
+

@@ -1,36 +1,55 @@
 
 <h2>Seznam příspěvků</h2>
+
+<?php if($_POST['row']==NULL){
+		echo '<h3>Žádné příspěvky</h3>';	
+	} else { ?>
 <br>
 <div class="container">
-	  <table class="table table-bordered table-striped">
-				    <thead class="thead-default">
-				      <tr>
-				        <th>Název příspěvku</th>
-				        <th>Příspěvek</th>
-				        <th>Akce</th>
-				      </tr>
-				    </thead>
-				    <tbody>
-						<?php foreach ($_POST['row'] as $record) { ?>
-									<tr> 
-										<td class='col-xs-3'><?php echo $record['name'] ?></td> 
-										<td> <?php echo $record['cont'] ?></td>
-										<td class='col-xs-2'>
-											<form method='post'>
-												<button name='editButton' type='submit' class='btn btn-info btn-sm' value='<?php echo $record['id']?>'>
-													<span class='glyphicon glyphicon-edit'></span> Upravit
-												</button>
-												<button name='removeButton' type='submit' class='btn btn-danger btn-sm' value='<?php echo $record['id']?>'>
-													<span class='glyphicon glyphicon-remove'></span> Vymazat
-												</button>
-											</form>
-										</td> 
-									</tr>
-								<?php } ?>
-					</tbody>
-				  </table>
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-default">
+		    <tr>
+		        <th>Název příspěvku</th>
+		        <th>Příspěvek</th>
+		        <th>Akce</th>
+		     </tr>
+		</thead>
+		<tbody>
+			<?php
+			foreach ($_POST['row'] as $record) { ?>
+				<tr> 
+					<td class='col-xs-3'><?php echo $record['name'] ?></td> 
+					<td> <?php echo $record['cont'] ?></td>
+					<td class='col-xs-3'>
+					<form method='post'>
+						<?php if($record['decision']==0) { ?>
+							<button name='displayButton' type='submit' class='btn btn-default btn-sm' value='<?php echo $record['id']?>'>
+								<span class='glyphicon glyphicon-search'></span> Zobrazit
+							</button>
+							<button name='editButton' type='submit' class='btn btn-info btn-sm' value='<?php echo $record['id']?>'>
+								<span class='glyphicon glyphicon-edit'></span> Upravit
+							</button>
+							<button name='removeButton' type='submit' class='btn btn-danger btn-sm' value='<?php echo $record['id']?>'>
+								<span class='glyphicon glyphicon-remove'></span> Vymazat
+							</button>
+						<?php } else { ?>
+							<button name='displayButton' type='submit' class='btn btn-default btn-sm' value='<?php echo $record['id']?>'>
+								<span class='glyphicon glyphicon-edit'></span> Zobrazit
+							</button>
+							<button name='' type='submit' class='btn btn-default btn-warning btn-sm' value='<?php echo $record['id'] ?>'>
+								<span class='glyphicon glyphicon glyphicon-warning'></span> Příspěvek nelze dále upravovat
+							</button>
+						<?php } ?>
+					</form>
+					</td> 
+				</tr>
+				<?php }} ?>
+		</tbody>
+	 </table>
+	 <form action ="" class="" method="post"> 
+		<button name="newContButton" type="submit" class="btn btn-primary">Nový příspěvek</button>
+	</form>
 </div>
-<form action ="" class="" method="post"> 
-	<button name="newContButton" type="submit" class="btn btn-primary">Nový příspěvek</button>
-</form>
+
 

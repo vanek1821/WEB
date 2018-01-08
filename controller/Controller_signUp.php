@@ -1,5 +1,5 @@
 <?php
-
+	//Rehistrace uživatele
 	class Controller_signUp extends Controller{
 
 		protected $login;
@@ -20,6 +20,7 @@
 	}
 
 		public function doWork(){
+			//Zaregistrování uživatele
 			if(isset($_POST['signUpButton'])){
 
 				$this->login = $_POST['login'];
@@ -29,6 +30,8 @@
 				$this->privileges = 3;
 				$confirm = $_POST['confirm'];
 
+
+				//Jednotlivé chybějící údaje nutné k registraci
 				if (strcmp($this->login, "")==0) {
 					header('Location: index.php?page=signUp&miss=login');
 				}

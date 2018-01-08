@@ -1,5 +1,5 @@
 <?php
-	
+	//Odhlášení uživatele
 	Class Controller_signOut extends Controller{
 
 		public function __construnct(){

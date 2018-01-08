@@ -1,5 +1,5 @@
 <?php
-
+	//Přihlášení
 	class Controller_login extends Controller{
 
 		//login - zadáno uživatelem
@@ -23,9 +23,12 @@
 	}
 
 		public function doWork(){
-			
+			$_SESSION['signed'] = false;
+
+			//Přihlášení
 			if (isset($_POST['loginButton'])) {
 
+				//nastavení vnitřních atributů
 				$this->login = $_POST['login'];
 				$this->password = $_POST['password'];
 
@@ -35,10 +38,12 @@
 				$this->dblogin = $row['login'];
 				$this->dbpassword = $row['password'];
 
+				//Uživatle již přihláśen
 				if($_SESSION['signed']==true){
 					header('Location: index.php?page=login&login_status=already_logged');
 				}
 				else {
+					//Porovnání zadaných údajů s údaji z databáze
 					if(strcmp($this->login, $this->dblogin)==0){
 						if(strcmp($this->password, $this->dbpassword)==0){
 							$_SESSION['signed'] = true;
@@ -55,6 +60,7 @@
 						header('Location: index.php?page=login&login_status=unknown_user');
 					}
 				}
+				//Registrace nového uživatele
 				if (isset($_POST['newAccountButton'])) {
 					header('Location: index.php?page=signUp');
 				}

@@ -1,13 +1,14 @@
 <?php
+	//Předek všech kontrolerů
+	abstract class Controller {
+		
+		//atribut pohledu
+		protected $view;
 
-abstract class Controller {
+		//metoda pro zobrazení
+		abstract function Display();
 
-	protected $view;
-
-	abstract function Display();
-
-	abstract function DoWork();
+		//metoda vykonávající funkcí kontroleru
+		abstract function DoWork();
 }
-
-
 ?>

@@ -1,29 +1,25 @@
 <?php
-
+	//Nástěnka
 	class Controller_konf extends Controller{
 
 		public function __construct() {
 
-			if($_SESSION['privileges']==1){
-				$this->view = 'konfAdmin';
-			}
-			if($_SESSION['privileges']==2){
-				$this->view = 'konfRecenzent';
-			}
-			if($_SESSION['privileges']==3){
-				$this->view = 'konfAutor';
+				$this->view = 'konf';
+		}
+
+		public function Display(){
+			if($this->view !=""){
+				require("view/template/template_konf.phtml");
 			}
 		}
 
 		public function doWork(){
-
+			$_POST['row'] = Database::getAcceptedConts();
+			//Zobrazení příspěvku
+			if(isset($_POST['displayButton'])){
+        		header('Location: http://localhost/index.php?page=contribution&id='.$_POST['displayButton']);
+        	}
 		}
 
-		public function Display(){
-
-		if($this->view !=""){
-			require("view/template/template_konf.phtml");
-		}
-	}
 }
 ?>

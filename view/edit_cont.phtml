@@ -1,19 +1,40 @@
 <h2>Upravit příspěvek</h2>
-<form action ="" class="" method="post">
+<form action ="" class="" method="post" enctype="multipart/form-data">
 	<div class="form-group col-xs-12">
-		<div class="form-group col-xs-5">
-	  		<div class="form-group">
-	  			<label>Název příspěvku</label>
-	    		<input name="contName" type="text" class="form-control" required="" autofocus="" value="<?php echo $this->contName;?>">
-	  		</div>
+		<div class="row">
+			<div class="form-group col-xs-5">
+		  		<div class="form-group">
+		  			<label>Název příspěvku</label>
+		    		<input name="contName" type="text" class="form-control" required="" autofocus="" value="<?php echo $this->contName;?>">
+		  		</div>
+			</div>
 		</div>
-		<div class="form-group col-xs-8">
-	  			<label>příspěvek</label>
-	    		<textarea name="cont" class="form-control" id="exampleTextarea" rows="5" required="" ><?php echo $this->cont;?></textarea>
+		<div class="row">
+			<div class="form-group col-xs-8">
+	  				<label>Příspěvek</label>
+	    			<textarea name="cont" class="form-control" id="exampleTextarea" rows="5" required="" ><?php echo $this->cont;?></textarea>
+	  		</div>
 	  	</div>
-	  	<div class="form-group col-xs-11">
-			<button name="editContButton" type="submit" class="btn btn-primary">Upravit příspěvek</button>
-			<button name="back"  class="btn btn-primary" formnovalidate>Zpět</button>
+	  	<div class="row">
+			<div class ="form-group col-xs-5">
+				<a href="<?php echo $this->file; ?>" class="btn btn-default btn-primary" download>
+						<span class='glyphicon glyphicon glyphicon-download'></span> Stáhnout soubor
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-xs-6">
+			  	<div class="form-group">
+					<label for="file">Nahrajte  soubor</label>
+					<input type="file" name="file" accept>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+		  	<div class="form-group col-xs-11">
+				<button name="editContButton" type="submit" class="btn btn-primary">Upravit příspěvek</button>
+				<button name="back"  class="btn btn-primary" formnovalidate>Zpět</button>
+			</div>
 		</div>
 	</div>
 </form>

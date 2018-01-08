@@ -1,5 +1,5 @@
 <?php
-
+	//Hlavní stránka
 	class Controller_mainPage extends Controller{
 
 
@@ -8,7 +8,7 @@
 		}
 
 		public function doWork(){
-			
+			$_SESSION['user'];
 		}
 		public function Display(){
 

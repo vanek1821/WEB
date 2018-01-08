@@ -1,0 +1,37 @@
+<h2>Příspěvek</h2>
+<form action ="" class="" method="post">
+	<div class="form-group col-xs-12">
+		<div class="row">
+			<div class="form-group col-xs-3">
+		  		<div class="form-group">
+		  			<label>Název příspěvku</label>
+		    		<input name="contName" type="text" class="form-control" required="" autofocus="" value="<?php echo $this->contName;?>" readonly>
+		  		</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-xs-3">
+	  				<label>Autor</label>
+	    			<input name="contName" type="text" class="form-control" required="" autofocus="" value="<?php echo $this->author?>" readonly>
+	  		</div>
+	  	</div>
+		<div class="row">
+			<div class="form-group col-xs-6">
+		  			<label>Příspěvek</label>
+		    		<textarea name="cont" class="form-control" id="exampleTextarea" rows="5" required="" readonly><?php echo $this->cont;?></textarea>
+		  	</div>
+		</div>
+		<div class="row">
+			<div class ="form-group col-xs-5">
+				<a href="<?php echo $this->file; ?>" class="btn btn-default btn-primary" download>
+						<span class='glyphicon glyphicon glyphicon-download'></span> Stáhnout soubor
+				</a>
+			</div>
+		</div>
+		<div class="row">
+		  	<div class="form-group col-xs-8">
+				<button name="back"  class="btn btn-primary" formnovalidate>Zpět</button>
+			</div>
+		</div>
+	</div>
+</form>
